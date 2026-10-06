@@ -13,5 +13,9 @@ Yetkisiz bot taramaları, port ve URL tarayıcıları (`/admin`, `/wp-admin` vb.
 * `templates/react/`: TypeScript destekli `Jumpscare.tsx` bileşeni, `useJumpscare` kancası ve örnek `DecoyAdminPage.tsx` sayfası.
 * `snippets/`: Next.js middleware, Nginx reverse proxy ve Express.js tuzak yönlendirme kod parçacıkları.
 
+## Canlı ve Yayın Durumu
+* GitHub Reposu: `ktarxhun/lamersavar` (Public, https://github.com/ktarxhun/lamersavar)
+* Lisans: MIT
+
 ## Güncellemeler ([Araç, TARİH] İmzalı)
-* **[Antigravity, 2026-10-06]** Proje oluşturuldu. Best of BLG, BLGMUN ve Makerından projelerinde başarıyla uygulanan bal tuzağı mekanizması açık kaynak şablon paketi olarak derlendi. Standalone Vanilla ve React/Next.js şablonları, video medya varlıkları, sunucu yönlendirme kodları ve MIT lisansı hazırlandı.
+* **[Antigravity, 2026-10-06]** Proje oluşturuldu. Best of BLG, BLGMUN ve Makerından projelerinde başarıyla uygulanan bal tuzağı mekanizması açık kaynak şablon paketi olarak derlendi. Standalone Vanilla ve React/Next.js şablonları, video medya varlıkları, sunucu yönlendirme kodları ve MIT lisansı hazırlandı. GitHub üzerinde `ktarxhun/lamersavar` adıyla public olarak yayınlandı.
