@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Administration Gateway | Secure Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e293b;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: #0b0f19;
+      --input-border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      padding: 24px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .background-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-icon svg {
+      width: 26px;
+      height: 26px;
+      color: #60a5fa;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+    }
+
+    .security-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      margin-bottom: 22px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+    }
+
+    .security-badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #34d399;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 8px #34d399;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      font-size: 14px;
+      color: #f8fafc;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .form-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-group input::placeholder {
+      color: #475569;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 13px;
+      margin-top: 10px;
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    }
+
+    .btn-login:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .legal-notice {
+      margin-top: 18px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12px;
+      color: #475569;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Screamer Stage */
+    #screamerStage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 99999999;
+      display: none;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    #screamerVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-grid"></div>
+
+  <div class="login-container" id="portalWrapper">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+      </div>
+      <h1>Admin Console Gateway</h1>
+      <p>SECURE SESSION CONTROL</p>
+    </div>
+
+    <div class="card">
+      <div class="security-badge">
+        <span>TLS 1.3 / E2EE</span>
+        <span class="security-badge-status">
+          <span class="status-dot"></span>
+          ACTIVE GATEWAY
+        </span>
+      </div>
+
+      <form id="decoyForm" autocomplete="off">
+        <div class="form-group">
+          <label for="username">Operator Identifier</label>
+          <input type="text" id="username" placeholder="admin / operator" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Passphrase / Root Key</label>
+          <input type="password" id="password" placeholder="••••••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-login" id="submitBtn">
+          <span>Authenticate Operator</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </form>
+
+      <p class="legal-notice">
+        Unauthorized access attempts are audited, logged, and traced per applicable cybersecurity statutes.
+      </p>
+    </div>
+
+    <div class="footer">
+      INTERNAL ACCESS ONLY &bull; BUILD 2026.10
+    </div>
+  </div>
+
+  <div id="screamerStage">
+    <video id="screamerVideo" src="jumpscare.mp4" loop playsinline></video>
+  </div>
+
+  <script>
+    const form = document.getElementById('decoyForm');
+    const portal = document.getElementById('portalWrapper');
+    const stage = document.getElementById('screamerStage');
+    const video = document.getElementById('screamerVideo');
+
+    let triggered = false;
+
+    function engageTrap() {
+      if (triggered) return;
+      triggered = true;
+
+      // 1. Request Fullscreen
+      const doc = document.documentElement;
+      const requestFS = doc.requestFullscreen ||
+                        doc.webkitRequestFullscreen ||
+                        doc.mozRequestFullScreen ||
+                        doc.msRequestFullscreen;
+
+      if (requestFS) {
+        requestFS.call(doc).catch(() => {});
+      }
+
+      // 2. Hide Form, Show Video
+      portal.style.display = 'none';
+      stage.style.display = 'block';
+
+      // 3. Play Video at Maximum Volume
+      video.currentTime = 0;
+      video.muted = false;
+      video.volume = 1.0;
+
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If browser autoplay policy blocked sound, unlock audio on any next user interaction
+          const unlockAudio = () => {
+            video.muted = false;
+            video.volume = 1.0;
+            video.play().catch(() => {});
+          };
+          window.addEventListener('click', unlockAudio, { once: true });
+          window.addEventListener('keydown', unlockAudio, { once: true });
+        });
+      }
+
+      // 4. Trap Window Navigation / Close
+      window.addEventListener('beforeunload', (event) => {
+        event.preventDefault();
+        return (event.returnValue = 'Session active. Are you sure you want to terminate?');
+      });
+
+      // 5. Prevent Context Menu to make closing harder
+      window.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      engageTrap();
+    });
+
+    document.getElementById('submitBtn').addEventListener('click', (e) => {
+      // Trigger even if empty
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      if (!user || !pass) {
+        e.preventDefault();
+        engageTrap();
+      }
+    });
+  </script>
+</body>
+</html>
