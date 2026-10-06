@@ -2,6 +2,8 @@
 
 > The ultimate decoy admin portal and honeypot jumpscare trap for web applications.
 
+[🇬🇧 English](README.md) &bull; [🇹🇷 Türkçe](README.tr.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ktarxhun/lamersavar)
 [![Platform](https://img.shields.io/badge/platform-Vanilla%20%7C%20React%20%7C%20Next.js-orange.svg)](#templates)

@@ -19,3 +19,4 @@ Yetkisiz bot taramaları, port ve URL tarayıcıları (`/admin`, `/wp-admin` vb.
 
 ## Güncellemeler ([Araç, TARİH] İmzalı)
 * **[Antigravity, 2026-10-06]** Proje oluşturuldu. Best of BLG, BLGMUN ve Makerından projelerinde başarıyla uygulanan bal tuzağı mekanizması açık kaynak şablon paketi olarak derlendi. Standalone Vanilla ve React/Next.js şablonları, video medya varlıkları, sunucu yönlendirme kodları ve MIT lisansı hazırlandı. GitHub üzerinde `ktarxhun/lamersavar` adıyla public olarak yayınlandı.
+* **[Antigravity, 2026-10-06]** Türkçe dokümantasyon (`README.tr.md`) eklendi ve ana `README.md` ile karşılıklı dil yönlendirmeleri bağlandı.
